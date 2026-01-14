@@ -587,6 +587,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1088205634}
+    - targetCorrespondingSourceObject: {fileID: 7308235905141624706, guid: d33249e5ae722fb40ad2807c439696d9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1088205635}
   m_SourcePrefab: {fileID: 100100000, guid: d33249e5ae722fb40ad2807c439696d9, type: 3}
 --- !u!1001 &162897621
 PrefabInstance:
@@ -2012,6 +2016,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1088205635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088205630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8549277ddd2a0d429235df6651ec640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chomp
 --- !u!1001 &1360630566
 PrefabInstance:
   m_ObjectHideFlags: 0
