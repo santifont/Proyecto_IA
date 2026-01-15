@@ -11,7 +11,7 @@ public class NavJugador : MonoBehaviour
     void Start()
     {
         controller = this.GetComponent<CharacterController>();
-         velocidad = 5.0f;
+         velocidad = 1.0f;
     }
     void Update()
     {
