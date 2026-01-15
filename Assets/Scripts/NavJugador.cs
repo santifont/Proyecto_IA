@@ -11,7 +11,7 @@ public class NavJugador : MonoBehaviour
     void Start()
     {
         controller = this.GetComponent<CharacterController>();
-         velocidad = 1.0f;
+        velocidad = 3.0f;
     }
     void Update()
     {
@@ -20,8 +20,8 @@ public class NavJugador : MonoBehaviour
     {
 
         //Capturo el movimiento en los ejes
-        float movimientoV = Input.GetAxis("Horizontal") * -1;
-        float movimientoH = Input.GetAxis("Vertical");
+        float movimientoH = Input.GetAxis("Horizontal");
+        float movimientoV = Input.GetAxis("Vertical");
 
         Vector3 anguloTeclas = new Vector3(movimientoH, 0f, movimientoV);
         

@@ -4,11 +4,11 @@ using UnityEngine.UIElements;
 
 public class Chomp : MonoBehaviour
 {
-
+    private GameObject gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -21,7 +21,9 @@ public class Chomp : MonoBehaviour
         if (other.CompareTag("ball"))
         {
             Debug.Log("BALL");
-            Destroy(other);
+            Destroy(other.gameObject);
+            gameManager.GetComponent<Puntaje>().sumarPunto();
+
         }
 
         if (other.CompareTag("cherry"))
