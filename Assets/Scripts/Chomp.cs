@@ -4,31 +4,38 @@ using UnityEngine.UIElements;
 
 public class Chomp : MonoBehaviour
 {
-    private GameObject gameManager;
+    private GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.transform.position.x < -20.95f)
+        {
+            transform.position = new Vector3(14.0f, transform.position.y, transform.position.z);
+        }
 
+        if (gameObject.transform.position.x > 18.4f)
+        {
+            transform.position = new Vector3(-18.5f, transform.position.y, transform.position.z);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ball"))
         {
-            Debug.Log("BALL");
             Destroy(other.gameObject);
-            gameManager.GetComponent<Puntaje>().sumarPunto();
-
+            gameManager.RestarBola();
         }
 
         if (other.CompareTag("cherry"))
         {
-            Debug.Log("You touched a CHERRY");
+            Destroy(other.gameObject);
+            gameManager.Cherry();
         }
     }
 }
