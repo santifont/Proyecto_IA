@@ -1,10 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private int bolas = 0;
-    private int fantasmas = 0;
     private GameObject[] cantidadFantasmas;
     private GameObject[] cantidadBolas;
     private TextMeshProUGUI enemigosRestantes;
@@ -13,31 +12,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         enemigosRestantes = GameObject.Find("EnemigosRestantes").GetComponent<TextMeshProUGUI>();
-        bolasRestantes = GameObject.Find("BolasRestantes").GetComponent<TextMeshProUGUI>();
+        bolasRestantes    = GameObject.Find("BolasRestantes").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        cantidadBolas = GameObject.FindGameObjectsWithTag("ball");
+        cantidadBolas     = GameObject.FindGameObjectsWithTag("ball");
         cantidadFantasmas = GameObject.FindGameObjectsWithTag("Enemy");
+        enemigosRestantes.text = "Enemigos\nRestantes\n" + cantidadFantasmas.Length;
+        bolasRestantes.text    = "Bolas\nRestantes\n" + cantidadBolas.Length;
 
-        if (cantidadFantasmas.Length == null)
+        if (cantidadBolas.Length == 0)
         {
-            enemigosRestantes.text = "Enemigos\nRestantes\n" + 0;
+            VictoryScreen();
         }
-        else if (cantidadFantasmas.Length != null)
-        {
-            enemigosRestantes.text = "Enemigos\nRestantes\n" + cantidadFantasmas.Length;
-        }
-
-        bolasRestantes.text = "Bolas\nRestantes\n" + cantidadBolas.Length;
-    }
-
-    public void RestarBola()
-    {
-        bolas--;
-        Debug.Log("-1 ball!");
     }
 
     public void Cherry()
@@ -47,5 +36,26 @@ public class GameManager : MonoBehaviour
         {
             Destroy(cantidadFantasmas[i]);
         }
+    }
+
+    // Escenas
+    public void VictoryScreen()
+    {
+        SceneManager.LoadScene("WinScene");
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("ChompMan");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

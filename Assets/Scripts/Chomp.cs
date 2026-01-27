@@ -29,13 +29,18 @@ public class Chomp : MonoBehaviour
         if (other.CompareTag("ball"))
         {
             Destroy(other.gameObject);
-            gameManager.RestarBola();
+            Debug.Log("BOLA");
         }
 
         if (other.CompareTag("cherry"))
         {
             Destroy(other.gameObject);
             gameManager.Cherry();
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            gameManager.GameOver();
         }
     }
 }
