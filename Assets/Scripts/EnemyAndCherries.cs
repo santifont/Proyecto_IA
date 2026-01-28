@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class Puntaje : MonoBehaviour
+public class EnemyAndCherries : MonoBehaviour
 {
-    private int puntaje = 0;
+    public GameObject ghosts1;
+    public GameObject ghosts2;
+    public GameObject ghosts3;
+    public GameObject cherry;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,11 +16,5 @@ public class Puntaje : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void sumarPunto()
-    {
-        puntaje++;
-        Debug.Log("Punto sumado");
     }
 }
