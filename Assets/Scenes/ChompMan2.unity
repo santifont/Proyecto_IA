@@ -1725,7 +1725,7 @@ GameObject:
   - component: {fileID: 219770052}
   m_Layer: 0
   m_Name: spawn_11
-  m_TagString: Untagged
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 230969387}
   m_Layer: 0
   m_Name: spawn_5
-  m_TagString: Untagged
+  m_TagString: bigEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2237,18 +2237,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1532974597}
   - {fileID: 549924307}
   - {fileID: 1958021190}
-  - {fileID: 659451149}
-  - {fileID: 230969387}
   - {fileID: 1824530585}
   - {fileID: 913732787}
   - {fileID: 1078602852}
-  - {fileID: 1665455748}
-  - {fileID: 351420527}
   - {fileID: 219770052}
   - {fileID: 677964761}
+  - {fileID: 1532974597}
+  - {fileID: 659451149}
+  - {fileID: 230969387}
+  - {fileID: 1665455748}
+  - {fileID: 351420527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &255836836
@@ -2672,21 +2672,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9163715946089635206, guid: bbf054d6e436c51468be981115a84991,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163715946089635206, guid: bbf054d6e436c51468be981115a84991,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163715946089635206, guid: bbf054d6e436c51468be981115a84991,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163715946089635206, guid: bbf054d6e436c51468be981115a84991,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.88
       objectReference: {fileID: 0}
@@ -2735,15 +2720,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9163715946089635206, guid: bbf054d6e436c51468be981115a84991,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991,
         type: 3}
       propertyPath: m_Name
       value: Ghost_Orange Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991,
         type: 3}
@@ -3304,7 +3289,7 @@ GameObject:
   - component: {fileID: 351420527}
   m_Layer: 0
   m_Name: spawn_10
-  m_TagString: Untagged
+  m_TagString: bigEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4929,7 +4914,7 @@ GameObject:
   - component: {fileID: 549924307}
   m_Layer: 0
   m_Name: spawn_2
-  m_TagString: Untagged
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5234,7 +5219,7 @@ GameObject:
   - component: {fileID: 659451149}
   m_Layer: 0
   m_Name: spawn_4
-  m_TagString: Untagged
+  m_TagString: bigEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5367,8 +5352,8 @@ GameObject:
   m_Component:
   - component: {fileID: 677964761}
   m_Layer: 0
-  m_Name: spawn_12
-  m_TagString: Untagged
+  m_Name: spawn_0
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5663,7 +5648,7 @@ GameObject:
   - component: {fileID: 691053265}
   m_Layer: 0
   m_Name: cherryspot_2
-  m_TagString: Untagged
+  m_TagString: cherrySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7142,7 +7127,7 @@ GameObject:
   - component: {fileID: 913732787}
   m_Layer: 0
   m_Name: spawn_7
-  m_TagString: Untagged
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7772,7 +7757,7 @@ GameObject:
   - component: {fileID: 995008969}
   m_Layer: 0
   m_Name: cherryspot_3
-  m_TagString: Untagged
+  m_TagString: cherrySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8639,7 +8624,7 @@ GameObject:
   - component: {fileID: 1078602852}
   m_Layer: 0
   m_Name: spawn_8
-  m_TagString: Untagged
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8964,7 +8949,7 @@ GameObject:
   - component: {fileID: 1101273123}
   m_Layer: 0
   m_Name: cherryspot_1
-  m_TagString: Untagged
+  m_TagString: cherrySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10818,6 +10803,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -11388,6 +11378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1484215935965174168, guid: 60c2480153d4da841ab193c749b9e87c,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484215935965174168, guid: 60c2480153d4da841ab193c749b9e87c,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -11803,7 +11798,7 @@ GameObject:
   - component: {fileID: 1532974597}
   m_Layer: 0
   m_Name: spawn_1
-  m_TagString: Untagged
+  m_TagString: bigEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12168,8 +12163,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1601313704}
   m_Layer: 0
-  m_Name: cherryspot_4
-  m_TagString: Untagged
+  m_Name: cherryspot_0
+  m_TagString: cherrySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12271,7 +12266,7 @@ GameObject:
   - component: {fileID: 1665455748}
   m_Layer: 0
   m_Name: spawn_9
-  m_TagString: Untagged
+  m_TagString: bigEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13703,7 +13698,7 @@ GameObject:
   - component: {fileID: 1824530585}
   m_Layer: 0
   m_Name: spawn_6
-  m_TagString: Untagged
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14465,7 +14460,6 @@ GameObject:
   - component: {fileID: 1901047536}
   - component: {fileID: 1901047535}
   - component: {fileID: 1901047538}
-  - component: {fileID: 1901047539}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -14486,7 +14480,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnBalls
   ball: {fileID: 1189647692537122, guid: 296eeb3b9bc02fb44927747cd46985d7, type: 3}
-  powerUp: {fileID: 3251690325731265376, guid: 8dadb4a5d9de8a941b6bb68d601ad73f, type: 3}
 --- !u!4 &1901047536
 Transform:
   m_ObjectHideFlags: 0
@@ -14514,22 +14507,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6ceacfd9e8ef2489331ba392166a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
---- !u!114 &1901047539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901047534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125edc1927fc8ab48bab83ed95763fe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAndCherries
-  ghosts1: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c, type: 3}
-  ghosts2: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991, type: 3}
-  ghosts3: {fileID: 1484215935965174168, guid: 60c2480153d4da841ab193c749b9e87c, type: 3}
-  cherry: {fileID: 1864432535}
+  cherry: {fileID: 3251690325731265376, guid: 8dadb4a5d9de8a941b6bb68d601ad73f, type: 3}
+  bigGhost: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991,
+    type: 3}
+  smallGhost:
+  - {fileID: 1484215935965174168, guid: 60c2480153d4da841ab193c749b9e87c, type: 3}
+  - {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c, type: 3}
 --- !u!1 &1910068228
 GameObject:
   m_ObjectHideFlags: 0
@@ -15473,7 +15456,7 @@ GameObject:
   - component: {fileID: 1958021190}
   m_Layer: 0
   m_Name: spawn_3
-  m_TagString: Untagged
+  m_TagString: smallEnemyS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17304,8 +17287,8 @@ SceneRoots:
   - {fileID: 1901047536}
   - {fileID: 65825750}
   - {fileID: 1360630566}
-  - {fileID: 289025278}
   - {fileID: 1425355261}
+  - {fileID: 289025278}
   - {fileID: 155948688}
   - {fileID: 247766163}
   - {fileID: 1864432536}

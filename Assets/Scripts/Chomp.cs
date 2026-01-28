@@ -35,7 +35,7 @@ public class Chomp : MonoBehaviour
         if (other.CompareTag("cherry"))
         {
             Destroy(other.gameObject);
-            gameManager.Cherry();
+            Debug.Log("CHERRY");
         }
 
         if (other.CompareTag("Enemy"))
