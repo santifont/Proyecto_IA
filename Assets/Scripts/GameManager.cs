@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,16 +13,14 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI bolasRestantes;
 
     // CORUTINAS
-    private bool loop = true;
+    private bool loop         = true;
+    private bool cherryActive = false;
     public  GameObject   cherry;
     public  GameObject   bigGhost;
     public  GameObject[] smallGhost;
     private GameObject[] smallEnemySpawns;
     private GameObject[] bigEnemySpawns;
     private GameObject[] cherrySpawns;
-
-    // POWER PHASE
-
     private GameObject[] activeEnemies;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,8 +41,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cantidadBolas    = GameObject.FindGameObjectsWithTag("ball");
-        enemy            = GameObject.FindGameObjectsWithTag("Enemy");
+        cantidadBolas = GameObject.FindGameObjectsWithTag("ball");
+        enemy         = GameObject.FindGameObjectsWithTag("Enemy");
+
+
         enemigosRestantes.text = "Enemigos\nRestantes\n" + enemy.Length;
         bolasRestantes.text    = "Bolas\nRestantes\n" + cantidadBolas.Length;
 
@@ -74,19 +75,31 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Cherry()
     {
-        GameObject cherryInstance =
+        while (cherryActive == false)
+        {
+            GameObject cherryInstance =
                 Instantiate(cherry,
                 cherrySpawns[Random.Range(0, cherrySpawns.Length)].transform.position,
                 Quaternion.identity);
-        cherryInstance.name = "cherry";
-        yield return new WaitForSeconds(10f);
+            cherryInstance.name = "cherry";
+            cherryActive = true;
+            yield return new WaitForSeconds(10f);
+
+        }
 
     }
 
-    /*IEnumerator PowerPhase()
+    IEnumerator PowerPhase()
     {
-
-    }*/
+        StopCoroutine(Cherry());
+        StopCoroutine(Enemies());
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            enemy[i].GetComponent<NavMeshAgent>().speed = 1.75f;
+        }
+        yield return new WaitForSeconds(5f);
+        
+    }
 
     // Escenas
     public void VictoryScreen()
@@ -101,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("ChompMan");
+        SceneManager.LoadScene("ChompMan2");
     }
 
     public void ExitGame()

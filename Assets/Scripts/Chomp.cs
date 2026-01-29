@@ -24,18 +24,17 @@ public class Chomp : MonoBehaviour
             transform.position = new Vector3(-18.5f, transform.position.y, transform.position.z);
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ball"))
         {
             Destroy(other.gameObject);
-            Debug.Log("BOLA");
         }
 
         if (other.CompareTag("cherry"))
         {
             Destroy(other.gameObject);
-            Debug.Log("CHERRY");
         }
 
         if (other.CompareTag("Enemy"))
