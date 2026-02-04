@@ -13,15 +13,14 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI bolasRestantes;
 
     // CORUTINAS
-    private bool loop         = true;
-    private bool cherryActive = false;
+    public  bool danger = true;
     public  GameObject   cherry;
     public  GameObject   bigGhost;
     public  GameObject[] smallGhost;
     private GameObject[] smallEnemySpawns;
     private GameObject[] bigEnemySpawns;
     private GameObject[] cherrySpawns;
-    private GameObject[] activeEnemies;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,7 +34,7 @@ public class GameManager : MonoBehaviour
         cherrySpawns     = GameObject.FindGameObjectsWithTag("cherrySpawn");
 
         StartCoroutine(Enemies());
-        StartCoroutine(Cherry());
+        Cherry();
     }
 
     // Update is called once per frame
@@ -43,8 +42,6 @@ public class GameManager : MonoBehaviour
     {
         cantidadBolas = GameObject.FindGameObjectsWithTag("ball");
         enemy         = GameObject.FindGameObjectsWithTag("Enemy");
-
-
         enemigosRestantes.text = "Enemigos\nRestantes\n" + enemy.Length;
         bolasRestantes.text    = "Bolas\nRestantes\n" + cantidadBolas.Length;
 
@@ -52,18 +49,37 @@ public class GameManager : MonoBehaviour
         {
             VictoryScreen();
         }
+
+        if (danger == true)
+        {
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                enemy[i].GetComponent<Renderer>().material.color = Color.red;
+                enemy[i].GetComponent<NavMeshAgent>().speed = 3.5f;
+            }
+        }
+        else if (danger == false)
+        {
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                enemy[i].GetComponent<Renderer>().material.color = Color.blue;
+                enemy[i].GetComponent<NavMeshAgent>().speed = 1.75f;
+            }
+        }
     }
 
     IEnumerator Enemies()
     {
-        while (loop == true)
+        while (danger == true)
         {
+            // Small enemy spawns
             GameObject smallInstance =
                 Instantiate(smallGhost[Random.Range(0, smallGhost.Length)],
                 smallEnemySpawns[Random.Range(0, smallEnemySpawns.Length)].transform.position,
                 Quaternion.identity);
             smallInstance.name = "small ghost";
 
+            // Big enemy spawns
             GameObject bigInstance =
                 Instantiate(bigGhost, bigEnemySpawns[Random.Range(0,
                 bigEnemySpawns.Length)].transform.position,
@@ -73,32 +89,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator Cherry()
+    public void Cherry()
     {
-        while (cherryActive == false)
-        {
-            GameObject cherryInstance =
+        GameObject cherryInstance =
                 Instantiate(cherry,
                 cherrySpawns[Random.Range(0, cherrySpawns.Length)].transform.position,
                 Quaternion.identity);
-            cherryInstance.name = "cherry";
-            cherryActive = true;
-            yield return new WaitForSeconds(10f);
+        cherryInstance.name = "cherry";
+    }
 
-        }
-
+    public void PowerPhaseMethod()
+    {
+            StartCoroutine(PowerPhase());
     }
 
     IEnumerator PowerPhase()
     {
-        StopCoroutine(Cherry());
-        StopCoroutine(Enemies());
-        for (int i = 0; i < enemy.Length; i++)
-        {
-            enemy[i].GetComponent<NavMeshAgent>().speed = 1.75f;
-        }
-        yield return new WaitForSeconds(5f);
-        
+        danger = false;
+        yield return new WaitForSeconds(10f);        
+        danger = true;
+        Cherry();
+        StartCoroutine(Enemies());
     }
 
     // Escenas
