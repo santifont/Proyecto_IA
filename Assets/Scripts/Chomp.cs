@@ -46,6 +46,7 @@ public class Chomp : MonoBehaviour
         else if (other.CompareTag("Enemy") && gameManager.danger == false)
         {
             Destroy(other.gameObject);
+            gameManager.enemyCounter++;
         }
     }
 }

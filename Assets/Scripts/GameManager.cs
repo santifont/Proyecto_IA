@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
     private GameObject[] bigEnemySpawns;
     private GameObject[] cherrySpawns;
 
+    // CONTADORES
+    private GameObject dataBase;
+    public int   enemyCounter = 0;
+    public float gameTime     = 0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +40,9 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(Enemies());
         Cherry();
+
+        // BASE DE DATOS
+        dataBase = GameObject.Find("DDOL"); // GetComponent<DataBase>();
     }
 
     // Update is called once per frame
@@ -63,9 +71,13 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < enemy.Length; i++)
             {
                 enemy[i].GetComponent<Renderer>().material.color = Color.blue;
-                enemy[i].GetComponent<NavMeshAgent>().speed = 1.75f;
+                enemy[i].GetComponent<NavMeshAgent>().speed = 2f;
             }
         }
+
+        gameTime = Time.deltaTime + gameTime;
+        dataBase.GetComponent<DataBase>().gameTime = gameTime;
+        dataBase.GetComponent<DataBase>().enemyCounter = enemyCounter;
     }
 
     IEnumerator Enemies()
@@ -115,11 +127,14 @@ public class GameManager : MonoBehaviour
     // Escenas
     public void VictoryScreen()
     {
+        StopAllCoroutines();
+        danger = false;
         SceneManager.LoadScene("WinScene");
     }
 
     public void GameOver()
     {
+        StopAllCoroutines();
         SceneManager.LoadScene("GameOver");
     }
 

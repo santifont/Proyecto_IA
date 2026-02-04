@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class NavJugador : MonoBehaviour
 {
-    float velocidad;
+    private float velocidad = 4f;
     // GameObject GameobjectwithCharacterController;
     CharacterController controller ;
     void Start()
     {
         controller = this.GetComponent<CharacterController>();
-        velocidad = 3.0f;
     }
     void Update()
     {
