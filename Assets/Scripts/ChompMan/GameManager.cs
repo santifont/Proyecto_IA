@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] cherrySpawns;
 
     // CONTADORES
-    private GameObject dataBase;
+    private DataBase dataBase;
     public int   enemyCounter = 0;
     public float gameTime     = 0f;
 
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         Cherry();
 
         // BASE DE DATOS
-        dataBase = GameObject.Find("DDOL"); // GetComponent<DataBase>();
+        dataBase = GameObject.Find("DataBase").GetComponent<DataBase>();
     }
 
     // Update is called once per frame
@@ -75,8 +75,8 @@ public class GameManager : MonoBehaviour
         }
 
         gameTime = Time.deltaTime + gameTime;
-        dataBase.GetComponent<DataBase>().gameTime = gameTime;
-        dataBase.GetComponent<DataBase>().enemyCounter = enemyCounter;
+        dataBase.gameTime = gameTime;
+        dataBase.enemyCounter = enemyCounter;
     }
 
     IEnumerator Enemies()

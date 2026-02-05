@@ -12,6 +12,7 @@ TagManager:
   - cherrySpawn
   - bigEnemyS
   - smallEnemyS
+  - button
   layers:
   - Default
   - TransparentFX
