@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
         {
             VictoryScreen();
         }
-
         if (danger == true)
         {
             for (int i = 0; i < enemy.Length; i++)
@@ -84,14 +83,14 @@ public class GameManager : MonoBehaviour
     {
         while (danger == true)
         {
-            // Small enemy spawns
+            // ENEMIGOS PEQUEÑOS
             GameObject smallInstance =
                 Instantiate(smallGhost[Random.Range(0, smallGhost.Length)],
                 smallEnemySpawns[Random.Range(0, smallEnemySpawns.Length)].transform.position,
                 Quaternion.identity);
             smallInstance.name = "small ghost";
 
-            // Big enemy spawns
+            // ENEMIGOS GRANDES
             GameObject bigInstance =
                 Instantiate(bigGhost, bigEnemySpawns[Random.Range(0,
                 bigEnemySpawns.Length)].transform.position,
@@ -124,7 +123,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Enemies());
     }
 
-    // Escenas
+    // ESCENAS
     public void VictoryScreen()
     {
         StopAllCoroutines();
