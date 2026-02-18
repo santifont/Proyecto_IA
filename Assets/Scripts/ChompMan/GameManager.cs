@@ -3,14 +3,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    // DIFICULTAD
+    private bool difficulty = false; // Easy = false; Hard = true;
+
     // CANVAS y BOLAS
     private GameObject[]    enemy;
     private GameObject[]    cantidadBolas;
     private TextMeshProUGUI enemigosRestantes;
     private TextMeshProUGUI bolasRestantes;
+    private TextMeshProUGUI timer;
 
     // CORUTINAS
     public  bool danger = true;
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
         // CANVAS y BOLAS
         enemigosRestantes = GameObject.Find("EnemigosRestantes").GetComponent<TextMeshProUGUI>();
         bolasRestantes    = GameObject.Find("BolasRestantes").GetComponent<TextMeshProUGUI>();
+        timer             = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
 
         // CORUTINAS
         smallEnemySpawns = GameObject.FindGameObjectsWithTag("smallEnemyS");
@@ -42,16 +48,17 @@ public class GameManager : MonoBehaviour
         Cherry();
 
         // BASE DE DATOS
-        dataBase = GameObject.Find("DataBase").GetComponent<DataBase>();
+        //dataBase = GameObject.Find("DataBase").GetComponent<DataBase>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // PARÁMETROS
         cantidadBolas = GameObject.FindGameObjectsWithTag("ball");
         enemy         = GameObject.FindGameObjectsWithTag("Enemy");
-        enemigosRestantes.text = "Enemigos\nRestantes\n" + enemy.Length;
-        bolasRestantes.text    = "Bolas\nRestantes\n" + cantidadBolas.Length;
+        enemigosRestantes.text = enemy.Length + "";
+        bolasRestantes.text    = cantidadBolas.Length + "";
 
         if (cantidadBolas.Length == 0)
         {
@@ -74,9 +81,21 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // TEMPORIZADOR
         gameTime = Time.deltaTime + gameTime;
-        dataBase.gameTime = gameTime;
-        dataBase.enemyCounter = enemyCounter;
+        // "Mathf.Round redonde al número entero más cercano"
+        // "Mathf.Floor" trunca al número entero actual o anterior. "Mathf.FloorToInt" hace lo mismo pero convierte a int".
+        // "Mathf.Ceil" y "Math.CeilToInt" hace lo contrario.
+        float minutes = Mathf.FloorToInt(gameTime / 60);
+        float seconds = Mathf.FloorToInt(gameTime % 60);
+        // Formato de minutos con segundos
+        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+
+
+        // BASE DE DATOS
+       // dataBase.gameTime = gameTime;
+       //dataBase.enemyCounter = enemyCounter;
     }
 
     IEnumerator Enemies()

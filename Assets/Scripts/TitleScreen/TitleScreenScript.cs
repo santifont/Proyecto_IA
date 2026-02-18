@@ -5,41 +5,65 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreenScript : MonoBehaviour
 {
-    public  bool difficulty = false;
+    public  bool difficulty = false; // false = facil; true = difícil.
     private bool titleState = true;
-    private GameObject   settings;
-    private GameObject   title;
+    private GameObject   difficultyCanvas;
+    private GameObject   titleCanvas;
+    private GameObject   creditsCanvas;
     private GameObject[] buttons;
-    private DataBase   dataBase;
+    private DataBase     dataBase;
     private TextMeshProUGUI difficultyText;
 
     private void Start()
     {
+        // BASE DE DATOS
         dataBase = GameObject.Find("DataBase").GetComponent<DataBase>();
+
         // CANVASES
-        settings = GameObject.Find("SettingsCanvas");
-        title    = GameObject.Find("Canvas");
+        difficultyCanvas = GameObject.Find("DifficultyCanvas");
+        titleCanvas      = GameObject.Find("TitleCanvas");
+        creditsCanvas    = GameObject.Find("CreditsCanvas");
+
         // BOTONES
         buttons  = GameObject.FindGameObjectsWithTag("button");
+
         // TEXTO
         difficultyText = GameObject.Find("DifficultyText").GetComponent<TextMeshProUGUI>();
+
         // ESTADO DE LOS CANVASES
-        settings.SetActive(false);
+        difficultyCanvas.SetActive(false);
+        creditsCanvas.SetActive(false);
     }
 
-    public void ChangeCanvas()
+    public void FromTitleToDifficulty()
     {
         if (titleState == false)
         {
             titleState = true;
-            title.SetActive(true);
-            settings.SetActive(false);
+            titleCanvas.SetActive(true);
+            difficultyCanvas.SetActive(false);
         }
         else if (titleState == true)
         {
             titleState = false;
-            title.SetActive(false);
-            settings.SetActive(true);
+            titleCanvas.SetActive(false);
+            difficultyCanvas.SetActive(true);
+        }
+    }
+
+    public void FromTitleToCredits()
+    {
+        if (titleState == false)
+        {
+            titleState = true;
+            titleCanvas.SetActive(true);
+            creditsCanvas.SetActive(false);
+        }
+        else if (titleState == true)
+        {
+            titleState = false;
+            titleCanvas.SetActive(false);
+            creditsCanvas.SetActive(true);
         }
     }
 
@@ -47,59 +71,61 @@ public class TitleScreenScript : MonoBehaviour
     {
         difficulty = true;
         dataBase.difficulty = difficulty;
-        StartCoroutine(DifficultyChange());
-        Debug.Log(dataBase.difficulty);
+        Debug.Log("Hard = " + dataBase.difficulty); // el valor debería ser true
+        StartCoroutine(DifficultyChosen());
     }
 
     public void EasyDifficulty()
     {
         difficulty = false;
         dataBase.difficulty = difficulty;
-        StartCoroutine(DifficultyChange());
-        Debug.Log(dataBase.difficulty);
+        Debug.Log("Easy = " + dataBase.difficulty); // el valor debería ser false
+        StartCoroutine(DifficultyChosen());
     }
 
-    IEnumerator DifficultyChange()
+    IEnumerator DifficultyChosen()
     {
-        if (difficulty == false)
+        if (difficulty == false) // FÁCIL
         {
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].SetActive(false);
             }
-            difficultyText.text = "You changed the difficulty to Easy";
+            difficultyText.text = "You chose EASY";
             yield return new WaitForSeconds(2f);
-            difficultyText.text =
-            "Choose the difficulty." +
-            "\nIt's currently set to Easy";
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
-                buttons[i].SetActive(true);
+                difficultyText.text = "Loading game.";
+                yield return new WaitForSeconds(0.3f);
+                difficultyText.text = "Loading game..";
+                yield return new WaitForSeconds(0.3f);
+                difficultyText.text = "Loading game...";
+                yield return new WaitForSeconds(0.3f);
             }
+            SceneManager.LoadScene("ChompMan");
         }
-        else if (difficulty == true)
+        else if (difficulty == true) // DIFÍCIL
         {
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].SetActive(false);
             }
-            difficultyText.text = "You changed the difficulty to Hard";
+            difficultyText.text = "You chose HARD";
             yield return new WaitForSeconds(2f);
-            difficultyText.text =
-            "Choose the difficulty." +
-            "\nIt's currently set to Hard";
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
-                buttons[i].SetActive(true);
+                difficultyText.text = "Loading game.";
+                yield return new WaitForSeconds(0.3f);
+                difficultyText.text = "Loading game..";
+                yield return new WaitForSeconds(0.3f);
+                difficultyText.text = "Loading game...";
+                yield return new WaitForSeconds(0.3f);
             }
+            SceneManager.LoadScene("ChompMan");
         }
     }
 
-    // CAMBIO DE ESCENA
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("ChompMan");
-    }
+    // SALIR DEL JUEGO
     public void ExitGame()
     {
         Application.Quit();
