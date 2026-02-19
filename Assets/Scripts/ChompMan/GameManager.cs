@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private GameObject[]    cantidadBolas;
     private TextMeshProUGUI enemigosRestantes;
     private TextMeshProUGUI bolasRestantes;
+    private TextMeshProUGUI powerUpTimer;
     private TextMeshProUGUI timer;
 
     // CORUTINAS
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     public  GameObject[] smallGhost;
     private GameObject[] smallEnemySpawns;
     private GameObject[] bigEnemySpawns;
+    private GameObject randomSmallPos;
+    private GameObject randomBigPos;
     private GameObject[] cherrySpawns;
 
     // CONTADORES
@@ -38,17 +41,30 @@ public class GameManager : MonoBehaviour
         enemigosRestantes = GameObject.Find("EnemigosRestantes").GetComponent<TextMeshProUGUI>();
         bolasRestantes    = GameObject.Find("BolasRestantes").GetComponent<TextMeshProUGUI>();
         timer             = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
+        powerUpTimer      = GameObject.Find("PowerUpTimer").GetComponent<TextMeshProUGUI>();
+        powerUpTimer.enabled = false;
 
         // CORUTINAS
         smallEnemySpawns = GameObject.FindGameObjectsWithTag("smallEnemyS");
         bigEnemySpawns   = GameObject.FindGameObjectsWithTag("bigEnemyS");
         cherrySpawns     = GameObject.FindGameObjectsWithTag("cherrySpawn");
 
+        for (int i = 0; i < smallEnemySpawns.Length; i++)
+        {
+            smallEnemySpawns[i].SetActive(false);
+        }
+
+        for (int i = 0; i < bigEnemySpawns.Length; i++)
+        {
+            bigEnemySpawns[i].SetActive(false);
+        }
+
+        // CORUTINAS
         StartCoroutine(Enemies());
         Cherry();
 
         // BASE DE DATOS
-        //dataBase = GameObject.Find("DataBase").GetComponent<DataBase>();
+        dataBase = GameObject.Find("DataBase").GetComponent<DataBase>();
     }
 
     // Update is called once per frame
@@ -91,33 +107,51 @@ public class GameManager : MonoBehaviour
         // Formato de minutos con segundos
         timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-
-
         // BASE DE DATOS
-       // dataBase.gameTime = gameTime;
-       //dataBase.enemyCounter = enemyCounter;
+        dataBase.gameTime = gameTime;
+        dataBase.enemyCounter = enemyCounter;
     }
+
+    // MÉTODOS Y CORUTINAS DE ENEMIES
 
     IEnumerator Enemies()
     {
         while (danger == true)
         {
-            // ENEMIGOS PEQUEÑOS
-            GameObject smallInstance =
-                Instantiate(smallGhost[Random.Range(0, smallGhost.Length)],
-                smallEnemySpawns[Random.Range(0, smallEnemySpawns.Length)].transform.position,
-                Quaternion.identity);
-            smallInstance.name = "small ghost";
+            // ENEMIGOS PEQUEÑOS Y GRANDES para acceder a su transform.position
+            randomSmallPos = smallEnemySpawns[Random.Range(0, smallEnemySpawns.Length)];
+            randomBigPos = bigEnemySpawns[Random.Range(0, bigEnemySpawns.Length)];
 
-            // ENEMIGOS GRANDES
-            GameObject bigInstance =
-                Instantiate(bigGhost, bigEnemySpawns[Random.Range(0,
-                bigEnemySpawns.Length)].transform.position,
-                Quaternion.identity);
+            // Avisa de dónde aparecerán los enemigos con parpadeos.
+            StartCoroutine(BlinkingIndicator());
+            Debug.Log("LLEGUÉ");
+;           yield return new WaitForSeconds(3f);
+
+            // Instancia los enemigos
+            GameObject smallInstance = Instantiate(smallGhost[Random.Range(0, smallGhost.Length)], randomSmallPos.transform.position, Quaternion.identity);
+            GameObject bigInstance = Instantiate(bigGhost, randomBigPos.transform.position, Quaternion.identity);
+            smallInstance.name = "small ghost";
             bigInstance.name = "big ghost";
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(7f);
         }
     }
+
+    IEnumerator BlinkingIndicator()
+    {
+        Debug.Log("HOLA");
+        bool blink = true;
+        for (float i = 0; i < 10; i++)
+        {
+            randomSmallPos.SetActive(blink);
+            randomBigPos.SetActive(blink);
+            yield return new WaitForSeconds(0.3f);
+            blink = !blink;
+        }
+        randomSmallPos.SetActive(false);
+        randomBigPos.SetActive(false);
+    }
+
+    // MÉTODOS Y CORUTINAS DE CHERRY Y POWERPHASE
 
     public void Cherry()
     {
@@ -130,7 +164,8 @@ public class GameManager : MonoBehaviour
 
     public void PowerPhaseMethod()
     {
-            StartCoroutine(PowerPhase());
+        StartCoroutine(PowerPhase());
+        StartCoroutine(PowerPhaseTimer());
     }
 
     IEnumerator PowerPhase()
@@ -140,6 +175,17 @@ public class GameManager : MonoBehaviour
         danger = true;
         Cherry();
         StartCoroutine(Enemies());
+    }
+
+    IEnumerator PowerPhaseTimer()
+    {
+        powerUpTimer.enabled = true;
+        for (int i = 10; i > 0; i--) // El valor de la i tiene que ser el mismo que el valor del WaitForSeconds de la corutina "PowerPhase()".
+        {
+            powerUpTimer.text = "POWER UP! " + i + "s";
+            yield return new WaitForSeconds(1f);
+        }
+        powerUpTimer.enabled = false;
     }
 
     // ESCENAS
