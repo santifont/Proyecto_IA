@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         powerUpTimer      = GameObject.Find("PowerUpTimer").GetComponent<TextMeshProUGUI>();
         powerUpTimer.enabled = false;
 
-        // CORUTINAS
+        // SPAWNS
         smallEnemySpawns = GameObject.FindGameObjectsWithTag("smallEnemyS");
         bigEnemySpawns   = GameObject.FindGameObjectsWithTag("bigEnemyS");
         cherrySpawns     = GameObject.FindGameObjectsWithTag("cherrySpawn");
@@ -97,6 +97,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // CONTROL DE ENEMIGOS EN PANTALLA
+        if (enemy.Length >= 8)
+        {
+            danger = false;
+            Debug.Log("ENEMY LIMIT REACHED");
+        }
+
         // TEMPORIZADOR
         gameTime = Time.deltaTime + gameTime;
         // "Mathf.Round redonde al número entero más cercano"
@@ -118,27 +125,26 @@ public class GameManager : MonoBehaviour
     {
         while (danger == true)
         {
+            Debug.Log(danger);
             // ENEMIGOS PEQUEÑOS Y GRANDES para acceder a su transform.position
             randomSmallPos = smallEnemySpawns[Random.Range(0, smallEnemySpawns.Length)];
-            randomBigPos = bigEnemySpawns[Random.Range(0, bigEnemySpawns.Length)];
+            randomBigPos   = bigEnemySpawns[Random.Range(0, bigEnemySpawns.Length)];
 
             // Avisa de dónde aparecerán los enemigos con parpadeos.
             StartCoroutine(BlinkingIndicator());
-            Debug.Log("LLEGUÉ");
 ;           yield return new WaitForSeconds(3f);
 
             // Instancia los enemigos
             GameObject smallInstance = Instantiate(smallGhost[Random.Range(0, smallGhost.Length)], randomSmallPos.transform.position, Quaternion.identity);
-            GameObject bigInstance = Instantiate(bigGhost, randomBigPos.transform.position, Quaternion.identity);
+            GameObject bigInstance   = Instantiate(bigGhost, randomBigPos.transform.position, Quaternion.identity);
             smallInstance.name = "small ghost";
-            bigInstance.name = "big ghost";
+            bigInstance.name   = "big ghost";
             yield return new WaitForSeconds(7f);
         }
     }
 
     IEnumerator BlinkingIndicator()
     {
-        Debug.Log("HOLA");
         bool blink = true;
         for (float i = 0; i < 10; i++)
         {
@@ -189,6 +195,7 @@ public class GameManager : MonoBehaviour
     }
 
     // ESCENAS
+
     public void VictoryScreen()
     {
         StopAllCoroutines();
