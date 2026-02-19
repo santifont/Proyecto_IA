@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < enemy.Length; i++)
             {
                 enemy[i].GetComponent<Renderer>().material.color = Color.red;
-                enemy[i].GetComponent<NavMeshAgent>().speed = 3.5f;
+                enemy[i].GetComponent<NavMeshAgent>().speed = 50f;
             }
         }
         else if (danger == false)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < enemy.Length; i++)
             {
                 enemy[i].GetComponent<Renderer>().material.color = Color.blue;
-                enemy[i].GetComponent<NavMeshAgent>().speed = 2f;
+                enemy[i].GetComponent<NavMeshAgent>().speed = 25f;
             }
         }
 

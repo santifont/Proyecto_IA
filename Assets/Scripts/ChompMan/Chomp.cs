@@ -14,14 +14,14 @@ public class Chomp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.transform.position.x < -20.95f)
+        if (gameObject.transform.position.z < -13.2f)
         {
-            transform.position = new Vector3(14.0f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 20f);
         }
 
-        if (gameObject.transform.position.x > 18.4f)
+        if (gameObject.transform.position.z > 26.7f)
         {
-            transform.position = new Vector3(-18.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -7f);
         }
     }
 
