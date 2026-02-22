@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NavJugador : MonoBehaviour
 {
-    private float velocidad = 8f;
+    public float velocidad = 8f;
     // GameObject GameobjectwithCharacterController;
     CharacterController controller ;
     void Start()

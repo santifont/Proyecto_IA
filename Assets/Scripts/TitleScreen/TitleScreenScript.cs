@@ -102,7 +102,7 @@ public class TitleScreenScript : MonoBehaviour
                 difficultyText.text = "Loading game...";
                 yield return new WaitForSeconds(0.3f);
             }
-            SceneManager.LoadScene("ChompMan");
+            SceneManager.LoadScene("ChompManEASY");
         }
         else if (difficulty == true) // DIFÍCIL
         {
@@ -121,7 +121,7 @@ public class TitleScreenScript : MonoBehaviour
                 difficultyText.text = "Loading game...";
                 yield return new WaitForSeconds(0.3f);
             }
-            SceneManager.LoadScene("ChompMan");
+            SceneManager.LoadScene("ChompManHARD");
         }
     }
 

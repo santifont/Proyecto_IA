@@ -8,7 +8,19 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     // DIFICULTAD
-    private bool difficulty = false; // Easy = false; Hard = true;
+    [Header("     MONSTERS' SPEED")]
+    private bool difficulty; // Easy = false; Hard = true;
+
+    // CORUTINAS
+    public  bool danger = true;
+    public  GameObject   cherry;
+    public  GameObject   bigGhost;
+    public  GameObject[] smallGhost;
+    private GameObject[] smallEnemySpawns;
+    private GameObject[] bigEnemySpawns;
+    private GameObject   randomSmallPos;
+    private GameObject   randomBigPos;
+    private GameObject[] cherrySpawns;
 
     // CANVAS y BOLAS
     private GameObject[]    enemy;
@@ -18,17 +30,6 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI powerUpTimer;
     private TextMeshProUGUI timer;
 
-    // CORUTINAS
-    public  bool danger = true;
-    public  GameObject   cherry;
-    public  GameObject   bigGhost;
-    public  GameObject[] smallGhost;
-    private GameObject[] smallEnemySpawns;
-    private GameObject[] bigEnemySpawns;
-    private GameObject randomSmallPos;
-    private GameObject randomBigPos;
-    private GameObject[] cherrySpawns;
-
     // CONTADORES
     private DataBase dataBase;
     public int   enemyCounter = 0;
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // DIFICULTAD
+        difficulty = GameObject.Find("DataBase").GetComponent<DataBase>().difficulty; // Coge la dificultad de la base de datos
+
         // CANVAS y BOLAS
         enemigosRestantes = GameObject.Find("EnemigosRestantes").GetComponent<TextMeshProUGUI>();
         bolasRestantes    = GameObject.Find("BolasRestantes").GetComponent<TextMeshProUGUI>();
@@ -80,20 +84,49 @@ public class GameManager : MonoBehaviour
         {
             VictoryScreen();
         }
-        if (danger == true)
+
+        /*
+        public float dangerTrueSpeed = 7f;
+        public float dangerFalseSpeed = 3.5f;
+        public float accelerationTrueSpeed = 8f;
+        public float accelerationFalseSpeed = 8f;
+         */
+        if (difficulty == true)
         {
-            for (int i = 0; i < enemy.Length; i++)
+            if (danger == true)
             {
-                enemy[i].GetComponent<Renderer>().material.color = Color.red;
-                enemy[i].GetComponent<NavMeshAgent>().speed = 50f;
+                for (int i = 0; i < enemy.Length; i++)
+                {
+                    enemy[i].GetComponent<Renderer>().material.color = Color.red;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 5f;
+                }
+            }
+            else if (danger == false)
+            {
+                for (int i = 0; i < enemy.Length; i++)
+                {
+                    enemy[i].GetComponent<Renderer>().material.color = Color.blue;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 3f;
+                }
             }
         }
-        else if (danger == false)
+        else if (difficulty == false)
         {
-            for (int i = 0; i < enemy.Length; i++)
+            if (danger == true)
             {
-                enemy[i].GetComponent<Renderer>().material.color = Color.blue;
-                enemy[i].GetComponent<NavMeshAgent>().speed = 25f;
+                for (int i = 0; i < enemy.Length; i++)
+                {
+                    enemy[i].GetComponent<Renderer>().material.color = Color.red;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 8f;
+                }
+            }
+            else if (danger == false)
+            {
+                for (int i = 0; i < enemy.Length; i++)
+                {
+                    enemy[i].GetComponent<Renderer>().material.color = Color.blue;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 4f;
+                }
             }
         }
 
@@ -101,17 +134,12 @@ public class GameManager : MonoBehaviour
         if (enemy.Length >= 8)
         {
             danger = false;
-            Debug.Log("ENEMY LIMIT REACHED");
         }
 
         // TEMPORIZADOR
         gameTime = Time.deltaTime + gameTime;
-        // "Mathf.Round redonde al número entero más cercano"
-        // "Mathf.Floor" trunca al número entero actual o anterior. "Mathf.FloorToInt" hace lo mismo pero convierte a int".
-        // "Mathf.Ceil" y "Math.CeilToInt" hace lo contrario.
         float minutes = Mathf.FloorToInt(gameTime / 60);
         float seconds = Mathf.FloorToInt(gameTime % 60);
-        // Formato de minutos con segundos
         timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
         // BASE DE DATOS
@@ -139,7 +167,14 @@ public class GameManager : MonoBehaviour
             GameObject bigInstance   = Instantiate(bigGhost, randomBigPos.transform.position, Quaternion.identity);
             smallInstance.name = "small ghost";
             bigInstance.name   = "big ghost";
-            yield return new WaitForSeconds(7f);
+            if (difficulty == true)
+            {
+                yield return new WaitForSeconds(2f); // 5 segundos de powerup
+            }
+            else
+            {
+                yield return new WaitForSeconds(7f); // 10 segundos de powerup
+            }
         }
     }
 
@@ -176,20 +211,42 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PowerPhase()
     {
-        danger = false;
-        yield return new WaitForSeconds(10f);        
-        danger = true;
-        Cherry();
-        StartCoroutine(Enemies());
+        if ( difficulty == true)
+        {
+            danger = false;
+            yield return new WaitForSeconds(5f);
+            danger = true;
+            Cherry();
+            StartCoroutine(Enemies());
+        }
+        else 
+        {
+            danger = false;
+            yield return new WaitForSeconds(10f);        
+            danger = true;
+            Cherry();
+            StartCoroutine(Enemies());
+        }
     }
 
     IEnumerator PowerPhaseTimer()
     {
         powerUpTimer.enabled = true;
-        for (int i = 10; i > 0; i--) // El valor de la i tiene que ser el mismo que el valor del WaitForSeconds de la corutina "PowerPhase()".
+        if (difficulty == true)
         {
-            powerUpTimer.text = "POWER UP! " + i + "s";
-            yield return new WaitForSeconds(1f);
+            for (int i = 5; i > 0; i--) // El valor de la i tiene que ser el mismo que el valor del WaitForSeconds de la corutina "PowerPhase()".
+            {
+                powerUpTimer.text = "POWER UP! " + i + "s";
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        else if (difficulty == false)
+        {
+            for (int i = 10; i > 0; i--) // El valor de la i tiene que ser el mismo que el valor del WaitForSeconds de la corutina "PowerPhase()".
+            {
+                powerUpTimer.text = "POWER UP! " + i + "s";
+                yield return new WaitForSeconds(1f);
+            }
         }
         powerUpTimer.enabled = false;
     }

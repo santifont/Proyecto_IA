@@ -15,7 +15,10 @@ EditorBuildSettings:
     path: Assets/Scenes/WinScene.unity
     guid: b9f2a6a2233626b4582697779c6e1d7b
   - enabled: 1
-    path: Assets/Scenes/ChompMan.unity
-    guid: 37a914ea33e3f434c8e4fd58df714390
+    path: Assets/Scenes/ChompManEASY.unity
+    guid: b23d3759ef122674783f8432a321fcfc
+  - enabled: 1
+    path: Assets/Scenes/ChompManHARD.unity
+    guid: 3d0ab2ac09902e941bf10e0602969976
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
