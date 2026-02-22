@@ -85,12 +85,6 @@ public class GameManager : MonoBehaviour
             VictoryScreen();
         }
 
-        /*
-        public float dangerTrueSpeed = 7f;
-        public float dangerFalseSpeed = 3.5f;
-        public float accelerationTrueSpeed = 8f;
-        public float accelerationFalseSpeed = 8f;
-         */
         if (difficulty == true)
         {
             if (danger == true)
@@ -98,7 +92,7 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < enemy.Length; i++)
                 {
                     enemy[i].GetComponent<Renderer>().material.color = Color.red;
-                    enemy[i].GetComponent<NavMeshAgent>().speed = 5f;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 12f;
                 }
             }
             else if (danger == false)
@@ -106,7 +100,7 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < enemy.Length; i++)
                 {
                     enemy[i].GetComponent<Renderer>().material.color = Color.blue;
-                    enemy[i].GetComponent<NavMeshAgent>().speed = 3f;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 6f;
                 }
             }
         }
@@ -117,7 +111,7 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < enemy.Length; i++)
                 {
                     enemy[i].GetComponent<Renderer>().material.color = Color.red;
-                    enemy[i].GetComponent<NavMeshAgent>().speed = 8f;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 10f;
                 }
             }
             else if (danger == false)
@@ -125,7 +119,7 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < enemy.Length; i++)
                 {
                     enemy[i].GetComponent<Renderer>().material.color = Color.blue;
-                    enemy[i].GetComponent<NavMeshAgent>().speed = 4f;
+                    enemy[i].GetComponent<NavMeshAgent>().speed = 5f;
                 }
             }
         }
