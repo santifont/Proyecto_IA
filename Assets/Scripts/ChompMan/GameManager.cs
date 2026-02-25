@@ -80,10 +80,14 @@ public class GameManager : MonoBehaviour
         enemigosRestantes.text = enemy.Length + "";
         bolasRestantes.text    = cantidadBolas.Length + "";
 
+        // CUANDO CONSIGAS TODAS LAS BOLAS, GANASTE
+
         if (cantidadBolas.Length == 0)
         {
             VictoryScreen();
         }
+
+        // VELOCIDAD DE CHOMPMAN Y ENEMIGOS SEGÚN LA DIFICULTAD
 
         if (difficulty == true)
         {
