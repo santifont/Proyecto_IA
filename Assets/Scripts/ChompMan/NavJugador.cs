@@ -17,7 +17,6 @@ public class NavJugador : MonoBehaviour
     }
     void FixedUpdate()
     {
-
         //Capturo el movimiento en los ejes
         float movimientoH = Input.GetAxis("Horizontal");
         float movimientoV = Input.GetAxis("Vertical");
@@ -36,5 +35,4 @@ public class NavJugador : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(anguloTeclas);
         }
     }
-
 }
